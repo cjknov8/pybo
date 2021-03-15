@@ -12,7 +12,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -22,7 +21,7 @@ SECRET_KEY = 'ls&1oied3t*np!^y6664m!j2-l%ie=8g$w-bjk_pjryzd#3y6b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.34.72.98']
+ALLOWED_HOSTS = ['52.78.8.100']
 
 
 # Application definition
@@ -125,7 +124,7 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-
+# 로깅설정
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -133,7 +132,7 @@ LOGGING = {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse',
         },
-        'require-debug_true': {
+        'require_debug_true': {
             '()': 'django.utils.log.RequireDebugTrue',
         },
     },
@@ -154,9 +153,9 @@ LOGGING = {
             'class': 'logging.StreamHandler',
         },
         'django.server': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
         },
         'mail_admins': {
             'level': 'ERROR',
@@ -168,14 +167,14 @@ LOGGING = {
             'filters': ['require_debug_false'],
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': BASE_DIR / 'logs/mysite.log',
-            'maxBytes': 1024*1024*5, # 5 MB
+            'maxBytes': 1024*1024*5,  # 5 MB
             'backupCount': 5,
             'formatter': 'standard',
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'mail_admins',  'file'],
+            'handlers': ['console', 'mail_admins', 'file'],
             'level': 'INFO',
         },
         'django.server': {
@@ -183,5 +182,9 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
-    },
+        'pybo': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        },
+    }
 }
